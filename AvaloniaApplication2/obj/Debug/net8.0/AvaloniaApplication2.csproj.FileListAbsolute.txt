@@ -134,3 +134,4 @@ C:\Users\Larcade\RiderProjects\AvaloniaApplication2\AvaloniaApplication2\obj\Deb
 C:\Users\Larcade\RiderProjects\AvaloniaApplication2\AvaloniaApplication2\obj\Debug\net8.0\AvaloniaApplication2.csproj.CopyComplete
 C:\Users\Larcade\RiderProjects\AvaloniaApplication2\AvaloniaApplication2\obj\Debug\net8.0\AvaloniaApplication2.genruntimeconfig.cache
 C:\Users\Larcade\RiderProjects\AvaloniaApplication2\AvaloniaApplication2\obj\Debug\net8.0\ref\AvaloniaApplication2.dll
+C:\Users\Larcade\RiderProjects\AvaloniaApplication2\AvaloniaApplication2\obj\Debug\net8.0\AvaloniaApplication2.sourcelink.json

@@ -81,13 +81,13 @@
                         Background="#2D73FF"
                         Content="Добавить"
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Top"
+                        VerticalContentAlignment="Center"
                         Foreground="White"
-                        Width="67"
-                        Height="25"
+                        Width="100"
+                        Height="35"
                         Click="AddToListBox_Click"
                         CornerRadius="2 "
-                        FontWeight="500" FontSize="10"
+                        FontSize="16"
                         BorderBrush="Transparent"
                         />
                 
