@@ -1,0 +1,105 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:global="clr-namespace:"
+        xmlns:vm="using:AvaloniaApplication2.ViewModels"
+        mc:Ignorable="d" Width="500" Height="500"
+        x:Class="AvaloniaApplication2.Views.MainWindow"
+        x:DataType="global:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaApplication2">
+
+    
+    
+        <Window.Styles>
+                <Style Selector="Window">
+                        <Setter Property="Background" Value="#181A21"/>
+                        <Setter Property="Padding" Value="20"/>
+                </Style>
+        </Window.Styles>
+        
+        
+                
+        
+        <StackPanel Orientation="Vertical" Spacing="13">
+                <StackPanel.Styles>
+                        <Style Selector="Border">
+                                <Setter Property="Background" Value="#32353c"/>
+                        </Style>
+                        <Style Selector="TextBlock">
+                                <Setter Property="Foreground" Value="#1999ff"/>
+                                <Setter Property="FontWeight" Value="500"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="LetterSpacing" Value="0.4"/>
+                        </Style>
+			
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="TextBlock.Foreground" Value="White"/>
+                                <Setter Property="Background" Value="#2D73FF"/>
+                        </Style>
+                </StackPanel.Styles>
+                
+                <TextBlock
+                        Text="Введите имя"
+                        HorizontalAlignment="Center">
+                        
+                </TextBlock>
+                
+                <TextBox 
+                        Name="first_name"
+                        Width="300"
+                        Height="30"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        >
+                        
+                        
+                </TextBox>
+                
+                <TextBlock
+                        
+                        Text="Введите фамилию"
+                        HorizontalAlignment="Center">
+                        
+                </TextBlock>
+                
+                <TextBox 
+                        Name="last_name"
+                        Width="300"
+                        Height="30"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        >
+                        
+                        
+                </TextBox>
+                
+                
+                <Button Name="add_to_listbox"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Добавить"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Top"
+                        Foreground="White"
+                        Width="67"
+                        Height="25"
+                        Click="AddToListBox_Click"
+                        CornerRadius="2 "
+                        FontWeight="500" FontSize="10"
+                        BorderBrush="Transparent"
+                        />
+                
+                
+                <ListBox x:Name="listbox" Width="300" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding ListItems}" Margin="5">
+                        <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                        <TextBlock Text="{Binding}" Foreground="#2D73FF"/>
+                                </DataTemplate>
+                        </ListBox.ItemTemplate>
+                </ListBox>
+                
+        </StackPanel>
+
+</Window>
