@@ -7,8 +7,9 @@
         mc:Ignorable="d" Width="500" Height="500"
         x:Class="AvaloniaApplication2.Views.MainWindow"
         x:DataType="global:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="AvaloniaApplication2">
+        Icon="/Assets/favicon.ico"
+        Title="Приложение серожки"
+        WindowStartupLocation = "CenterScreen">
 
     
     
@@ -22,7 +23,7 @@
         
                 
         
-        <StackPanel Orientation="Vertical" Spacing="13">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Spacing="13">
                 <StackPanel.Styles>
                         <Style Selector="Border">
                                 <Setter Property="Background" Value="#32353c"/>
@@ -70,6 +71,7 @@
                         Height="30"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
+                        
                         >
                         
                         
@@ -92,10 +94,10 @@
                         />
                 
                 
-                <ListBox x:Name="listbox" Width="300" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding ListItems}" Margin="5">
+                <ListBox x:Name="listbox" Width="300" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding ListItems}" >
                         <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                        <TextBlock Text="{Binding}" Foreground="#2D73FF"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
                                 </DataTemplate>
                         </ListBox.ItemTemplate>
                 </ListBox>
