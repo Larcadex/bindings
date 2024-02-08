@@ -22,3 +22,6 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/Larcade/RiderProjects/AvaloniaApplication2/AvaloniaApplication2/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/Larcade/RiderProjects/AvaloniaApplication2/AvaloniaApplication2/Views/SelectedItemsWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

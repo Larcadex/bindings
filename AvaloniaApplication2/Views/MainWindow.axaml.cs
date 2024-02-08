@@ -1,7 +1,10 @@
+using System.Collections.ObjectModel;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using AvaloniaApplication2.ViewModels;
 
 namespace AvaloniaApplication2.Views
 {
@@ -10,6 +13,7 @@ namespace AvaloniaApplication2.Views
         private TextBox _firstNameTextBox;
         private TextBox _lastNameTextBox;
         private ListBox _listBox;
+        private SelectedItemModel _selectedItemModel;
 
         public MainWindow()
         {
@@ -19,19 +23,18 @@ namespace AvaloniaApplication2.Views
             _firstNameTextBox = this.FindControl<TextBox>("first_name");
             _lastNameTextBox = this.FindControl<TextBox>("last_name");
             _listBox = this.FindControl<ListBox>("listbox");
-            
+            _selectedItemModel = new SelectedItemModel();
         }
-        
+
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter )
+            if (e.Key == Key.Enter)
             {
-                if (first_name.Text != null && last_name.Text != null && 
-                    first_name.Text != "" && last_name.Text != "")
+                if (_firstNameTextBox.Text != null && _lastNameTextBox.Text != null &&
+                    _firstNameTextBox.Text != "" && _lastNameTextBox.Text != "")
                 {
                     AddToListBox_Click(sender, e);
                 }
-                
             }
         }
 
@@ -41,16 +44,24 @@ namespace AvaloniaApplication2.Views
             string lastName = _lastNameTextBox.Text;
             string fullName = $"{firstName} {lastName}";
 
-            if (firstName != null && lastName != null && 
+            if (firstName != null && lastName != null &&
                 firstName != "" && lastName != "")
             {
                 (DataContext as MainWindowViewModel)?.ListItems.Add(fullName);
             }
-            
-            first_name.Text = "";
-            last_name.Text = "";
 
-
+            _firstNameTextBox.Text = "";
+            _lastNameTextBox.Text = "";
         }
+
+        private void ShowSelectedItems_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var selectedItems = _listBox.SelectedItems.OfType<string>().ToList();
+            _selectedItemModel.SelectedItems = new ObservableCollection<string>(selectedItems);
+
+            var selectedItemsWindow = new SelectedItemsWindow(_selectedItemModel);
+            selectedItemsWindow.Show();
+        }
+
     }
 }
