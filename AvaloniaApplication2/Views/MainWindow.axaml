@@ -42,7 +42,7 @@
                 </StackPanel.Styles>
                 
                 <TextBlock
-                        Text="Введите имя"
+                        Text="Введите название"
                         HorizontalAlignment="Center">
                         
                 </TextBlock>
@@ -60,7 +60,7 @@
                 
                 <TextBlock
                         
-                        Text="Введите фамилию"
+                        Text="Введите цену"
                         HorizontalAlignment="Center">
                         
                 </TextBlock>
@@ -93,14 +93,40 @@
                         BorderBrush="Transparent"
                         />
                 
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                        <TextBlock
+                                Text="Название"
+                                Width="230"
+                                TextAlignment="Center">
+                        
+                        </TextBlock>
+                        <TextBlock
+                                Text="Цена"
+                                Width="230"
+                                TextAlignment="Center">
+                        
+                        </TextBlock>
+                </StackPanel>
                 
-                <ListBox x:Name="listbox" Width="300" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding ListItems}" >
-                        <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                        <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
-                                </DataTemplate>
-                        </ListBox.ItemTemplate>
-                </ListBox>
+                
+                <StackPanel Orientation="Horizontal" >
+                        <ListBox x:Name="listbox" Width="230" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding ListItems}" >
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
+                        
+                        <ListBox x:Name="listbox1" Width="230" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding ListItemsPrise}" >
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
+                </StackPanel>
+               
                 
                 <Button Name="show_selected"
                         HorizontalAlignment="Center"

@@ -7,10 +7,13 @@ namespace AvaloniaApplication2.Views
 {
     public partial class SelectedItemsWindow : Window
     {
+        private SelectedItemModel _selectedItemModel;
+
         public SelectedItemsWindow(SelectedItemModel selectedItemModel)
         {
+            _selectedItemModel = selectedItemModel;
+            DataContext = _selectedItemModel;
             InitializeComponent();
-            DataContext = selectedItemModel;
         }
 
         private void InitializeComponent()
