@@ -109,23 +109,26 @@
                 </StackPanel>
                 
                 
-                <StackPanel Orientation="Horizontal" >
-                        <ListBox x:Name="listbox" Width="230" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding ListItems}" >
-                                <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                                <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
-                                        </DataTemplate>
-                                </ListBox.ItemTemplate>
-                        </ListBox>
+       
+                <ListBox x:Name="listbox" Width="460" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding products}">
+                        <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                        <Grid Width="460">
+                                                <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0"  TextAlignment="Center" Text="{Binding Name}" Foreground="#2D73FF"/>
+                                                <TextBlock Grid.Column="1"  TextAlignment="Center" Text="{Binding Price}" Foreground="#2D73FF"/>
+                                        </Grid>
+                                </DataTemplate>
+                        </ListBox.ItemTemplate>
+                </ListBox>
+
+                
                         
-                        <ListBox x:Name="listbox1" Width="230" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding ListItemsPrise}" >
-                                <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                                <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
-                                        </DataTemplate>
-                                </ListBox.ItemTemplate>
-                        </ListBox>
-                </StackPanel>
+                       
                
                 
                 <Button Name="show_selected"

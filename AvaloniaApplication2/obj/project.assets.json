@@ -4700,19 +4700,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Larcade\\.nuget\\packages\\": {}
+    "C:\\Users\\aswag\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Larcade\\RiderProjects\\AvaloniaApplication2\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
+      "projectUniqueName": "C:\\Users\\aswag\\RiderProjects\\bindings\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
       "projectName": "AvaloniaApplication2",
-      "projectPath": "C:\\Users\\Larcade\\RiderProjects\\AvaloniaApplication2\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
-      "packagesPath": "C:\\Users\\Larcade\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Larcade\\RiderProjects\\AvaloniaApplication2\\AvaloniaApplication2\\obj\\",
+      "projectPath": "C:\\Users\\aswag\\RiderProjects\\bindings\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
+      "packagesPath": "C:\\Users\\aswag\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\aswag\\RiderProjects\\bindings\\AvaloniaApplication2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Larcade\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\aswag\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -4777,7 +4777,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

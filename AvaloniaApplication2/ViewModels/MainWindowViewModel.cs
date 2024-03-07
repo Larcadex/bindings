@@ -1,19 +1,13 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
+using AvaloniaApplication2.Models;
 using AvaloniaApplication2.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    public ObservableCollection<string> ListItems { get; set; }
-    
-    public ObservableCollection<int> ListItemsPrise { get; set; }
+    public ObservableCollection<Product> products { get; set; } = new();
 
-    public MainWindowViewModel()
-    {
-        ListItems = new ObservableCollection<string>();
-        ListItemsPrise = new ObservableCollection<int>();
-
-    }
-    
-    
+    public ObservableCollection<Product> select { get; set; } = new();
     
 }
+

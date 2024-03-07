@@ -4,38 +4,60 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:AvaloniaApplication2.ViewModels"
+        xmlns:global="clr-namespace:"
         mc:Ignorable="d" Width="500" Height="500"
         WindowStartupLocation = "CenterScreen"
-
-
         x:Class="AvaloniaApplication2.Views.SelectedItemsWindow"
-        x:DataType="viewModels:SelectedItemModel">
+        x:DataType="global:MainWindowViewModel"
+>
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="Background" Value="#181A21"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+    </Window.Styles>
+    
     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="50">
+        <StackPanel.Styles>
+            <Style Selector="Border">
+                <Setter Property="Background" Value="#32353c"/>
+            </Style>
+            <Style Selector="TextBlock">
+                <Setter Property="Foreground" Value="#1999ff"/>
+                <Setter Property="FontWeight" Value="500"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="LetterSpacing" Value="0.4"/>
+            </Style>
+			
+            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                <Setter Property="TextBlock.Foreground" Value="White"/>
+                <Setter Property="Background" Value="#2D73FF"/>
+            </Style>
+        </StackPanel.Styles>
+        
 
-    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-        <ListBox x:Name="listbox" Width="220" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding SelectedItems}" >
+        <ListBox x:Name="listbox" Width="460" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding select
+        }">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
+                    <Grid Width="460">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Margin="30,0,0,0" TextAlignment="Center" Text="{Binding Name}" Foreground="#2D73FF"/>
+                        <TextBlock Grid.Column="1" Margin="0,0,30,0" TextAlignment="Center" Text="{Binding Price}" Foreground="#2D73FF"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <ListBox x:Name="listbox1" Width="220" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding SelectedItemsPrice}" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock TextAlignment="Center" Text="{Binding}" Foreground="#2D73FF"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        
-        
-    </StackPanel>
         <TextBlock
             Width="230"
             TextAlignment="Center"
-            Name="Sum" 
-            Text="{Binding Summa}"/>
+            Name="summa" 
+            />
     </StackPanel>
 
 
