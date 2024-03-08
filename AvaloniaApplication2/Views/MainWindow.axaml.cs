@@ -6,6 +6,7 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using AvaloniaApplication2.ViewModels;
 using System.Linq;
+using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
 using AvaloniaApplication2.Models;
 
@@ -63,19 +64,70 @@ namespace AvaloniaApplication2.Views
             _lastNameTextBox.Text = "";
         }
         
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedProduct = _listBox.SelectedItem as Product;
+
+            if (selectedProduct != null)
+            {
+                var editWindow = new EditWindow(DataContext, this, selectedProduct);
+                editWindow.Show();
+                this.Hide();
+
+            }
+        }
+        
+        private void Remove_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var selectedItems = _listBox.SelectedItems.OfType<Product>().ToList();
+            
+
+            var viewModel = DataContext as MainWindowViewModel;
+            if (viewModel != null)
+            {
+                foreach (var selectedItem in selectedItems)
+                {
+                    viewModel.products.Remove(selectedItem);
+                }
+            }
+        }
+        
         
         private void ShowSelectedItems_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             var selectedItems = _listBox.SelectedItems.OfType<Product>().ToList();
-    
-            foreach (var selectedItem in selectedItems)
-            {
-                (DataContext as MainWindowViewModel)?.select.Add(selectedItem);
-            }
 
-            var selectedItemsWindow = new SelectedItemsWindow(DataContext);
-            selectedItemsWindow.Show();
+            var viewModel = DataContext as MainWindowViewModel;
+            if (viewModel != null)
+            {
+                foreach (var selectedItem in selectedItems)
+                {
+                    var existingItem = viewModel.select.FirstOrDefault(p => p.Name == selectedItem.Name);
+
+                    if (existingItem != null)
+                    {
+                        existingItem.Count++;
+                    }
+                    else
+                    {
+                        var newItem = new Product
+                        {
+                            Name = selectedItem.Name,
+                            Price = selectedItem.Price,
+                            Count = 1
+                        };
+                        viewModel.select.Add(newItem);
+                    }
+                }
+
+                _listBox.SelectedItems.Clear();
+
+                var selectedItemsWindow = new SelectedItemsWindow(DataContext, this);
+                selectedItemsWindow.Show();
+                this.Hide();
+            }
         }
+
 
 
     }

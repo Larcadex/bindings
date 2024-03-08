@@ -44,10 +44,14 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Margin="30,0,0,0" TextAlignment="Center" Text="{Binding Name}" Foreground="#2D73FF"/>
-                        <TextBlock Grid.Column="1" Margin="0,0,30,0" TextAlignment="Center" Text="{Binding Price}" Foreground="#2D73FF"/>
+                        <TextBlock Grid.Column="0" Margin="30,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Name}" Foreground="#2D73FF"/>
+                        <TextBlock Grid.Column="1" Margin="0,0,30,0" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Price}" Foreground="#2D73FF"/>
+                        <TextBox Grid.Column="2" Margin="0,0,30,0" TextAlignment="Center" VerticalAlignment="Center" Text= "{Binding Count}" Foreground="#2D73FF" KeyUp="TextBox_KeyUp"/>
+
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -58,6 +62,22 @@
             TextAlignment="Center"
             Name="summa" 
             />
+        
+        <Button Name="add_to_listbox"
+                HorizontalAlignment="Center"
+                Background="#2D73FF"
+                Content="Удалить"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="White"
+                Width="100"
+                Height="35"
+                Click="Remove_Click"
+                CornerRadius="2 "
+                FontSize="16"
+                BorderBrush="Transparent"
+        />
+        
     </StackPanel>
 
 

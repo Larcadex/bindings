@@ -129,7 +129,22 @@
                 
                         
                        
-               
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+
+                <Button Name="rem_to_listbox"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Удалить"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="100"
+                        Height="35"
+                        Click="Remove_Click"
+                        CornerRadius="2 "
+                        FontSize="16"
+                        BorderBrush="Transparent"
+                />
                 
                 <Button Name="show_selected"
                         HorizontalAlignment="Center"
@@ -145,6 +160,23 @@
                         FontSize="16"
                         BorderBrush="Transparent"
                 />
+                
+                <Button Name="edit_selected"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Редактировать"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="100"
+                        Height="35"
+                        Click="EditButton_Click"
+                        CornerRadius="2 "
+                        FontSize="16"
+                        BorderBrush="Transparent"
+                />
+                </StackPanel>
+
                 
         </StackPanel>
 

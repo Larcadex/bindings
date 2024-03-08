@@ -1,0 +1,97 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:global="clr-namespace:"
+        xmlns:vm="using:AvaloniaApplication2.ViewModels"
+        mc:Ignorable="d" Width="500" Height="500"
+        x:Class="AvaloniaApplication2.Views.EditWindow"
+        x:DataType="global:MainWindowViewModel"
+        Icon="/Assets/favicon.ico"
+        Title="Приложение серожки"
+        WindowStartupLocation = "CenterScreen">
+
+    
+    
+        <Window.Styles>
+                <Style Selector="Window">
+                        <Setter Property="Background" Value="#181A21"/>
+                        <Setter Property="Padding" Value="20"/>
+                </Style>
+        </Window.Styles>
+        
+        
+                
+        
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Spacing="13">
+                <StackPanel.Styles>
+                        <Style Selector="Border">
+                                <Setter Property="Background" Value="#32353c"/>
+                        </Style>
+                        <Style Selector="TextBlock">
+                                <Setter Property="Foreground" Value="#1999ff"/>
+                                <Setter Property="FontWeight" Value="500"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="LetterSpacing" Value="0.4"/>
+                        </Style>
+			
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="TextBlock.Foreground" Value="White"/>
+                                <Setter Property="Background" Value="#2D73FF"/>
+                        </Style>
+                </StackPanel.Styles>
+                
+                <TextBlock
+                        Text="Введите название"
+                        HorizontalAlignment="Center">
+                        
+                </TextBlock>
+                
+                <TextBox 
+                        Name="first_name"
+                        Width="300"
+                        Height="30"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        >
+                        
+                        
+                </TextBox>
+                
+                <TextBlock
+                        
+                        Text="Введите цену"
+                        HorizontalAlignment="Center">
+                        
+                </TextBlock>
+                
+                <TextBox 
+                        Name="last_name"
+                        Width="300"
+                        Height="30"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        
+                        >
+                        
+                        
+                </TextBox>
+                
+                
+                <Button Name="add_to_listbox"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Редактировать"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="100"
+                        Height="35"
+                        Click="EditProduct_Click"
+                        CornerRadius="2 "
+                        FontSize="16"
+                        BorderBrush="Transparent"
+                        />
+                
+        </StackPanel>
+</Window>

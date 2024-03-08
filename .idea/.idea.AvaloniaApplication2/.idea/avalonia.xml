@@ -5,6 +5,7 @@
       <map>
         <entry key="AvaloniaApplication2/App.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
         <entry key="AvaloniaApplication2/Models/model.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
+        <entry key="AvaloniaApplication2/Views/EditWindow.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
         <entry key="AvaloniaApplication2/Views/MainWindow.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
         <entry key="AvaloniaApplication2/Views/SelectedItemsWindow.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
       </map>
