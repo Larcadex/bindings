@@ -8,7 +8,10 @@ using AvaloniaApplication2.ViewModels;
 using System.Linq;
 using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
+using Avalonia.Media.Imaging;
 using AvaloniaApplication2.Models;
+using Avalonia.Media.Imaging;
+using System.IO;
 
 namespace AvaloniaApplication2.Views
 {
@@ -16,119 +19,87 @@ namespace AvaloniaApplication2.Views
     {
         private TextBox _firstNameTextBox;
         private TextBox _lastNameTextBox;
-        private ListBox _listBox;
+        private Bitmap _image;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            KeyUp += MainWindow_KeyDown;
             DataContext = new MainWindowViewModel();
-            
+
             _firstNameTextBox = this.FindControl<TextBox>("first_name");
             _lastNameTextBox = this.FindControl<TextBox>("last_name");
-            _listBox = this.FindControl<ListBox>("listbox");
-            
+            this.KeyDown += HandleKeyDown;
         }
 
-        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        public MainWindow(object mainWindowViewModel)
         {
-            if (e.Key == Key.Enter)
-            {
-                if (_firstNameTextBox.Text != null && _lastNameTextBox.Text != null &&
-                    _firstNameTextBox.Text != "" && _lastNameTextBox.Text != "")
-                {
-                    AddToListBox_Click(sender, e);
-                }
-            }
+            InitializeComponent();
+            DataContext = mainWindowViewModel;
+
+            _firstNameTextBox = this.FindControl<TextBox>("first_name");
+            _lastNameTextBox = this.FindControl<TextBox>("last_name");
+
         }
+
 
         private void AddToListBox_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             string firstName = _firstNameTextBox.Text;
-            
+
             if (firstName != null && firstName != "")
             {
                 var newProduct = new Product
                 {
                     Name = firstName,
-                    Price = int.Parse(_lastNameTextBox.Text)
+                    Price = int.Parse(_lastNameTextBox.Text),
+                    ImageSource = _image
+
                 };
-                
+
                 (DataContext as MainWindowViewModel)?.products.Add(newProduct);
 
-                
+
             }
-            
+
 
             _firstNameTextBox.Text = "";
             _lastNameTextBox.Text = "";
+
         }
-        
-        private void EditButton_Click(object sender, RoutedEventArgs e)
+
+        private void ToListBox_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            var selectedProduct = _listBox.SelectedItem as Product;
+            var Second = new SecondWindow(DataContext);
+            Second.Show();
+            this.Close();
 
-            if (selectedProduct != null)
-            {
-                var editWindow = new EditWindow(DataContext, this, selectedProduct);
-                editWindow.Show();
-                this.Hide();
-
-            }
         }
-        
-        private void Remove_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+
+        private void HandleKeyDown(object sender, KeyEventArgs e)
         {
-            var selectedItems = _listBox.SelectedItems.OfType<Product>().ToList();
-            
-
-            var viewModel = DataContext as MainWindowViewModel;
-            if (viewModel != null)
+            if (e.Key == Key.Escape)
             {
-                foreach (var selectedItem in selectedItems)
-                {
-                    viewModel.products.Remove(selectedItem);
-                }
-            }
-        }
-        
-        
-        private void ShowSelectedItems_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            var selectedItems = _listBox.SelectedItems.OfType<Product>().ToList();
-
-            var viewModel = DataContext as MainWindowViewModel;
-            if (viewModel != null)
-            {
-                foreach (var selectedItem in selectedItems)
-                {
-                    var existingItem = viewModel.select.FirstOrDefault(p => p.Name == selectedItem.Name);
-
-                    if (existingItem != null)
-                    {
-                        existingItem.Count++;
-                    }
-                    else
-                    {
-                        var newItem = new Product
-                        {
-                            Name = selectedItem.Name,
-                            Price = selectedItem.Price,
-                            Count = 1
-                        };
-                        viewModel.select.Add(newItem);
-                    }
-                }
-
-                _listBox.SelectedItems.Clear();
-
-                var selectedItemsWindow = new SelectedItemsWindow(DataContext, this);
-                selectedItemsWindow.Show();
-                this.Hide();
+                Close();
             }
         }
 
+        private async void SelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filters.Add(new FileDialogFilter() { Name = "Images", Extensions = { "jpg", "png", "jpeg" } });
+            openFileDialog.AllowMultiple = false;
+            var selectedFiles = await openFileDialog.ShowAsync(this);
 
+            if (selectedFiles != null)
+            {
+                
+                var imagePath = selectedFiles[0];
+                var bitmap = new Bitmap(imagePath);
+                _image = bitmap;
+
+            }
+        }
 
     }
 }

@@ -13,13 +13,14 @@ namespace AvaloniaApplication2.Views
     {
         private readonly TextBlock? _summa;
         private readonly ListBox? _listBox;
-        private readonly MainWindow _mainWindow;
 
-        public SelectedItemsWindow(object? MainWindowViewModel, MainWindow mainWindow)
+        public SelectedItemsWindow(object? MainWindowViewModel)
         {
             InitializeComponent();
             DataContext = MainWindowViewModel;
-            _mainWindow = mainWindow;
+            this.KeyDown += HandleKeyDown;
+            searchBox = this.FindControl<TextBox>("searchBox");
+
 
             _summa = this.FindControl<TextBlock>("summa");
             _listBox = this.FindControl<ListBox>("listbox");
@@ -35,6 +36,46 @@ namespace AvaloniaApplication2.Views
             {
                 viewModel.select.CollectionChanged += (sender, args) => { UpdateTotalPrice(); };
             }
+        }
+        
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            string sortBy = (comboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+
+            switch (sortBy)
+            {
+                case "Подешевле":
+                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderBy(p => p.Price);
+                    break;
+                case "Подороже":
+                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderByDescending(p => p.Price);
+                    break;
+                case "По имени (А-Я)":
+                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderBy(p => p.Name);
+                    break;
+                case "По имени (Я-А)":
+                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderByDescending(p => p.Name);
+                    break;
+                
+            }
+        }
+        
+        
+        private void SearchBox_KeyUp(object sender, Avalonia.Input.KeyEventArgs e)
+        {
+            string searchText = searchBox.Text.ToLower(); 
+    
+            string[] searchParts = searchText.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    
+            string nameSearchText = searchParts.Length > 0 ? searchParts[0] : "";
+            string priceSearchText = searchParts.Length > 1 ? searchParts[1] : "";
+
+            var filteredList = ((MainWindowViewModel)this.DataContext).products
+                .Where(product => product.Name.ToLower().Contains(nameSearchText))
+                .Where(product => priceSearchText == "" || product.Price.ToString().Contains(priceSearchText));
+    
+            listbox.ItemsSource = filteredList;
         }
 
         private void UpdateTotalPrice()
@@ -61,12 +102,7 @@ namespace AvaloniaApplication2.Views
                 }
             }
         }
-
         
-        private void OnClosed(object? sender, EventArgs e)
-        {
-            _mainWindow.Show();
-        }
         
         private void Remove_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -82,13 +118,47 @@ namespace AvaloniaApplication2.Views
                 }
             }
         }
+        
+        private void Decrease_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var product = (Product)button.DataContext;
+
+            product.Count--;
+            if (product.Count < 0)
+                product.Count = 0;
+            UpdateTotalPrice();
+        }
+
+        private void Increase_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var product = (Product)button.DataContext;
+
+            product.Count++;
+            UpdateTotalPrice();
+        }
+        private void ToListBox_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var Second = new SecondWindow(DataContext);
+            Second.Show();
+            this.Close();
+
+        }
 
         
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            Closed += OnClosed;
 
+        }
+        
+        private void HandleKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
     }
 }

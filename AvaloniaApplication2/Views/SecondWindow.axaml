@@ -1,0 +1,203 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:global="clr-namespace:"
+        xmlns:vm="using:AvaloniaApplication2.ViewModels"
+        WindowState="FullScreen"
+        x:Class="AvaloniaApplication2.Views.SecondWindow"
+        x:DataType="global:MainWindowViewModel"
+        Icon="/Assets/favicon.ico"
+        Title="Приложение серожки"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        WindowStartupLocation = "CenterScreen">
+
+    
+    
+        <Window.Styles>
+                <Style Selector="Window">
+                        <Setter Property="Background" Value="#181A21"/>
+                        <Setter Property="Padding" Value="20"/>
+                </Style>
+        </Window.Styles>
+        
+        
+                
+        
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Spacing="20">
+                <StackPanel.Styles>
+                        <Style Selector="Border">
+                                <Setter Property="Background" Value="#32353c"/>
+                        </Style>
+                        <Style Selector="TextBlock">
+                                <Setter Property="Foreground" Value="#1999ff"/>
+                                <Setter Property="FontWeight" Value="500"/>
+                                <Setter Property="FontSize" Value="32"/>
+                        </Style>
+			
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="TextBlock.Foreground" Value="White"/>
+                                <Setter Property="Background" Value="#2D73FF"/>
+                        </Style>
+                </StackPanel.Styles>
+                
+                
+                <StackPanel Width="1400" HorizontalAlignment="Center" >
+                        
+                        
+
+                        
+                        <Grid >
+                                <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="466"/>
+                                        <ColumnDefinition Width="466"/>
+                                        <ColumnDefinition Width="466"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock
+                                        Grid.Column="0"
+                                        Text="Название"
+                                        Width="466"
+                                        TextAlignment="Center">
+                        
+                                </TextBlock>
+                                <TextBlock
+                                        Grid.Column="1"
+                                        Text="Цена"
+                                        Width="466"
+                                        TextAlignment="Center">
+                        
+                                </TextBlock>
+                                
+                                <TextBlock
+                                        Grid.Column="2"
+                                        Text="Фото"
+                                        Width="466"
+                                        TextAlignment="Center">
+                        
+                                </TextBlock>
+                                
+                        </Grid>
+                        
+                      
+                </StackPanel>
+                
+                
+       
+                <ListBox x:Name="listbox" Width="1400" Background="#32353c" Height="650" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding products}">
+                        <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                        <Grid >
+                                                <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="466"/>
+                                                        <ColumnDefinition Width="466"/>
+                                                        <ColumnDefinition Width="466"/>
+
+
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0"  TextAlignment="Left"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Name}" FontSize="32" Foreground="#2D73FF"/>
+                                                <TextBlock Grid.Column="1"  TextAlignment="Left" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Price }" FontSize="32"  Foreground="#2D73FF"/>
+                                                <Image Grid.Column="2" Source="{Binding ImageSource}" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                        </Grid>
+                                </DataTemplate>
+                        </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <StackPanel Width="1400" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="20">
+
+                        <ComboBox Name="comboBox" Width="400" Height="75" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged">
+                                <ComboBoxItem Content="Подешевле"/>
+                                <ComboBoxItem Content="Подороже"/>
+                                <ComboBoxItem Content="По имени (А-Я)"/>
+                                <ComboBoxItem Content="По имени (Я-А)"/>
+
+                        </ComboBox>
+                        
+                        <TextBox x:Name="searchBox"
+                                 Width="980"
+                                 Height="75"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="32"
+                                 VerticalAlignment="Center"
+                                 Watermark="Поиск..." 
+                                 KeyUp="SearchBox_KeyUp"
+                        />
+                
+                </StackPanel>
+
+                
+                        
+                       
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,0,0,0" >
+
+                <Button Name="rem_to_listbox"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Удалить"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="230"
+                        Height="70"
+                        FontSize="32" 
+                        Click="Remove_Click"
+                        CornerRadius="2 "
+                        BorderBrush="Transparent"
+                />
+                
+                <Button Name="show_selected"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="В корзину"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="230"
+                        Height="70"
+                        FontSize="32" 
+                        Click="ShowSelectedItems_Click"
+                        CornerRadius="2 "
+                        
+                        BorderBrush="Transparent"
+                />
+                
+                <Button Name="edit_selected"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Редактировать"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="230"
+                        Height="70"
+                        FontSize="24" 
+                        Click="EditButton_Click"
+                        CornerRadius="2 "
+                        BorderBrush="Transparent"
+                />
+                
+                <Button Name="add_new"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Добавить"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="230"
+                        Height="70"
+                        FontSize="32" 
+                        Click="Add_Click"
+                        CornerRadius="2 "
+                        BorderBrush="Transparent"
+                />
+                </StackPanel>
+
+                
+        </StackPanel>
+
+</Window>

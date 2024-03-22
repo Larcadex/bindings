@@ -25,4 +25,6 @@ public partial class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
+    
+    
 }

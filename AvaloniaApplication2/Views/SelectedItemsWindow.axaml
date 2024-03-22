@@ -1,12 +1,14 @@
-﻿<!-- SelectedItemsWindow.xaml -->
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:AvaloniaApplication2.ViewModels"
         xmlns:global="clr-namespace:"
-        mc:Ignorable="d" Width="500" Height="500"
+        WindowState="FullScreen"
         WindowStartupLocation = "CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
         x:Class="AvaloniaApplication2.Views.SelectedItemsWindow"
         x:DataType="global:MainWindowViewModel"
 >
@@ -17,7 +19,7 @@
         </Style>
     </Window.Styles>
     
-    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="50">
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
         <StackPanel.Styles>
             <Style Selector="Border">
                 <Setter Property="Background" Value="#32353c"/>
@@ -25,8 +27,7 @@
             <Style Selector="TextBlock">
                 <Setter Property="Foreground" Value="#1999ff"/>
                 <Setter Property="FontWeight" Value="500"/>
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="LetterSpacing" Value="0.4"/>
+                <Setter Property="FontSize" Value="32"/>
             </Style>
 			
             <Style Selector="Button:pointerover /template/ ContentPresenter">
@@ -35,49 +36,145 @@
             </Style>
         </StackPanel.Styles>
         
+        <StackPanel Width="1400" HorizontalAlignment="Center" >
+                        
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="350"/>
 
-        <ListBox x:Name="listbox" Width="460" Height="200" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding select
+                </Grid.ColumnDefinitions>
+                                
+                <TextBlock
+                    Grid.Column="0"
+                    Text="Название"
+                    Width="350"
+                    TextAlignment="Center">
+                        
+                </TextBlock>
+                <TextBlock
+                    Grid.Column="1"
+                    Text="Цена"
+                    Width="350"
+                    TextAlignment="Center">
+                        
+                </TextBlock>
+                
+                <TextBlock
+                    Grid.Column="2"
+                    Text="Кол-во"
+                    Width="350"
+                    TextAlignment="Center">
+                        
+                </TextBlock>
+                                
+                <TextBlock
+                    Grid.Column="3"
+                    Text="Фото"
+                    Width="350"
+                    TextAlignment="Center">
+                        
+                </TextBlock>
+                                
+            </Grid>
+                        
+                      
+        </StackPanel>
+        
+
+        <ListBox x:Name="listbox" Width="1400" Background="#32353c" Height="680"  HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding select
         }">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="460">
+                    <Grid >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="350"/>
+                            <ColumnDefinition Width="350"/>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="350"/>
 
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Margin="30,0,0,0" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Name}" Foreground="#2D73FF"/>
-                        <TextBlock Grid.Column="1" Margin="0,0,30,0" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Price}" Foreground="#2D73FF"/>
-                        <TextBox Grid.Column="2" Margin="0,0,30,0" TextAlignment="Center" VerticalAlignment="Center" Text= "{Binding Count}" Foreground="#2D73FF" KeyUp="TextBox_KeyUp"/>
+                        <TextBlock Grid.Column="0"  TextAlignment="Left"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Name}" FontSize="32" Foreground="#2D73FF"/>
+                        <TextBlock Grid.Column="1"  TextAlignment="Left" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Price}" FontSize="32"  Foreground="#2D73FF"/>
+                        <TextBox Grid.Column="2"  TextAlignment="Center" HorizontalAlignment="Center"  Width="150" Height="60" FontSize="32" VerticalAlignment="Center" Text= "{Binding Count}" Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="TextBox_KeyUp"/>
+                        <Button Grid.Column="3" Content="-" FontSize="32" Click="Decrease_Click" Width="50" Height="45" HorizontalAlignment="Right" Margin="0,0,100,0" Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <Button Grid.Column="3" Content="+" FontSize="32" Click="Increase_Click" Width="50" Height="45" HorizontalAlignment="Right" Margin="0,0,45,0" Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <Image Grid.Column="4" Source="{Binding ImageSource}" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     </Grid>
                 </DataTemplate>
+
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <TextBlock
-            Width="230"
-            TextAlignment="Center"
-            Name="summa" 
+        <StackPanel Width="1400" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="20">
+
+            <ComboBox Name="comboBox" Width="400" Height="75" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="Подешевле"/>
+                <ComboBoxItem Content="Подороже"/>
+                <ComboBoxItem Content="По имени (А-Я)"/>
+                <ComboBoxItem Content="По имени (Я-А)"/>
+            </ComboBox>
+                        
+            <TextBox x:Name="searchBox"
+                     Width="880"
+                     Height="75"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     FontSize="32"
+                     VerticalAlignment="Center"
+                     Watermark="Поиск..." 
+                     KeyUp="SearchBox_KeyUp"
             />
-        
-        <Button Name="add_to_listbox"
-                HorizontalAlignment="Center"
-                Background="#2D73FF"
-                Content="Удалить"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                Foreground="White"
+            
+            <TextBlock
                 Width="100"
-                Height="35"
-                Click="Remove_Click"
-                CornerRadius="2 "
-                FontSize="16"
-                BorderBrush="Transparent"
-        />
+                TextAlignment="Center"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Name="summa" 
+            />
+                
+        </StackPanel>
         
+        
+        
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,0,0,0" >
+            <Button Name="add_to_listbox"
+                    HorizontalAlignment="Center"
+                    Background="#2D73FF"
+                    Content="Удалить"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Foreground="White"
+                    Width="230"
+                    Height="70"
+                    FontSize="32" 
+                    Click="Remove_Click"
+                    CornerRadius="2 "
+                    BorderBrush="Transparent"
+            />
+                
+            <Button Name="to_listbox"
+                    HorizontalAlignment="Center"
+                    Background="#2D73FF"
+                    Content="К списку"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Foreground="White"
+                    Width="230"
+                    Height="70"
+                    FontSize="32" 
+                    Click="ToListBox_Click"
+                    CornerRadius="2 "
+                    BorderBrush="Transparent"
+            />
+        </StackPanel>
     </StackPanel>
 
 
