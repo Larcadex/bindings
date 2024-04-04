@@ -15,25 +15,83 @@ namespace AvaloniaApplication2.Views
     public partial class SecondWindow : Window
     {
         private ListBox _listBox;
+        private int startIndex = 0;
+        private ComboBox _comboBox;
+        private int currentPage = 1;
+        private decimal allPage;
+        private TextBox _searchBox;
         
-        public SecondWindow(object mainWindowViewModel)
+
+        
+        
+        
+        public SecondWindow(object mainWindowViewModel, bool role)
         {
             InitializeComponent();
-           
-            DataContext = mainWindowViewModel;
-            searchBox = this.FindControl<TextBox>("searchBox");
-
             
+            _searchBox = this.FindControl<TextBox>("searchBox");
             _listBox = this.FindControl<ListBox>("listbox");
+            _comboBox = this.FindControl<ComboBox>("comboBox");
+            DataContext = mainWindowViewModel;
+            allPage = ((MainWindowViewModel)this.DataContext).products.Count / 2;
             
-            this.KeyDown += HandleKeyDown;
-            
+            if (((MainWindowViewModel)this.DataContext).products.Count % 2 != 0)
+            {
+                allPage += 1;
+
+            }
+    
+            page.Text = $"{currentPage}/{allPage}";
+
+            KeyDown += HandleKeyDown;
+     
+            if (role)
+            {
+                rem_to_listbox.IsVisible = true;
+                edit_selected.IsVisible = true;
+                add_new.IsVisible = true;
+                indent.IsVisible = false;
+            }
+
         }
+        
+       
+
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
+        {      
+
+            if (startIndex - 2 >= 0)
+            {
+                startIndex -= 2;
+                currentPage -= 1;
+                page.Text = $"{currentPage}/{allPage}";
+
+                UpdateListBox();
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (startIndex + 2 <((MainWindowViewModel)this.DataContext).products.Count)
+            {
+                startIndex += 2;
+                currentPage += 1;
+                page.Text = $"{currentPage}/{allPage}";
+
+                UpdateListBox();
+            }
+        }
+
+        private void UpdateListBox()
+        {
+            listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.Skip(startIndex).Take(2);
+        }
+
         
         
         private void SearchBox_KeyUp(object sender, Avalonia.Input.KeyEventArgs e)
         {
-            string searchText = searchBox.Text.ToLower(); 
+            string searchText =_searchBox.Text.ToLower(); 
     
             string[] searchParts = searchText.Split(' ', StringSplitOptions.RemoveEmptyEntries);
     
@@ -82,6 +140,7 @@ namespace AvaloniaApplication2.Views
         
         private void ShowSelectedItems_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
+            
             var selectedItems = _listBox.SelectedItems.OfType<Product>().ToList();
 
             var viewModel = DataContext as MainWindowViewModel;
@@ -109,15 +168,21 @@ namespace AvaloniaApplication2.Views
                 }
 
                 _listBox.SelectedItems.Clear();
+                
+                if (((MainWindowViewModel)this.DataContext).select.Count != null)
+                {
+                    var selectedItemsWindow = new SelectedItemsWindow(DataContext);
+                    selectedItemsWindow.Show();
+                    this.Hide();
+                }
 
-                var selectedItemsWindow = new SelectedItemsWindow(DataContext);
-                selectedItemsWindow.Show();
-                this.Hide();
+                
                 
                 
             }
             
         }
+        
         
         private void Add_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -137,8 +202,8 @@ namespace AvaloniaApplication2.Views
         
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            string sortBy = (comboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            string sortBy = (_comboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            
 
             switch (sortBy)
             {
@@ -155,7 +220,16 @@ namespace AvaloniaApplication2.Views
                     listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderByDescending(p => p.Name);
                     break;
                 
+                
             }
+        }
+        
+        private void Sign_in_click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+                
+            var newmain = new Sign_in();
+            newmain.Show();
+            this.Close();
         }
 
 

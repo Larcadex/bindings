@@ -50,7 +50,7 @@
                 </TextBlock>
                 
                 <TextBox 
-                        Name="first_name"
+                        Name="name"
                         Width="1100"
                         Height="75"
                         HorizontalAlignment="Center"
@@ -70,7 +70,7 @@
                 </TextBlock>
                 
                 <TextBox 
-                        Name="last_name"
+                        Name="price"
                         Width="1100"
                         Height="75"
                         HorizontalAlignment="Center"

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using AvaloniaApplication2.Models;
 using AvaloniaApplication2.ViewModels;
@@ -16,10 +17,13 @@ public class MainWindowViewModel : ViewModelBase
         new Product() {Name = "Каменушка", Price = 456, ImageSource = new Bitmap("C:\\Users\\aswag\\OneDrive\\Desktop\\крутые аватарки вк 2011\\kartinki-na-avu-dlya-parnei-krutie.jpg")},
         new Product() {Name = "Лисица", Price = 265, ImageSource = new Bitmap("C:\\Users\\aswag\\OneDrive\\Desktop\\крутые аватарки вк 2011\\d80cf0ad99d12c94be2cbee4ca4658ef.jpg")},
         new Product() {Name = "Лисица", Price = 456, ImageSource = new Bitmap("C:\\Users\\aswag\\OneDrive\\Desktop\\крутые аватарки вк 2011\\kartinki-na-avu-dlya-parnei-krutie.jpg")},
-        
+        new Product() {Name = "Лисица", Price = 456, ImageSource = new Bitmap("C:\\Users\\aswag\\OneDrive\\Desktop\\крутые аватарки вк 2011\\kartinki-na-avu-dlya-parnei-krutie.jpg")},
+
     };
 
     public ObservableCollection<Product> select { get; set; } = new();
+    
+    public RowDefinition roww { get; set; }
 
     public MainWindowViewModel()
     {

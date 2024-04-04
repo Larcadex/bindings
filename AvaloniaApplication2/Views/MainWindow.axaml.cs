@@ -17,42 +17,32 @@ namespace AvaloniaApplication2.Views
 {
     public partial class MainWindow : Window
     {
-        private TextBox _firstNameTextBox;
-        private TextBox _lastNameTextBox;
+        private TextBox _NameTextBox;
+        private TextBox __priceTextBoxBox;
         private Bitmap _image;
-
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = new MainWindowViewModel();
-
-            _firstNameTextBox = this.FindControl<TextBox>("first_name");
-            _lastNameTextBox = this.FindControl<TextBox>("last_name");
-            this.KeyDown += HandleKeyDown;
-        }
+        
 
         public MainWindow(object mainWindowViewModel)
         {
             InitializeComponent();
             DataContext = mainWindowViewModel;
 
-            _firstNameTextBox = this.FindControl<TextBox>("first_name");
-            _lastNameTextBox = this.FindControl<TextBox>("last_name");
+            _NameTextBox = this.FindControl<TextBox>("name");
+            __priceTextBoxBox = this.FindControl<TextBox>("price");
 
         }
 
 
         private void AddToListBox_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            string firstName = _firstNameTextBox.Text;
+            string firstName = _NameTextBox.Text;
 
             if (firstName != null && firstName != "")
             {
                 var newProduct = new Product
                 {
                     Name = firstName,
-                    Price = int.Parse(_lastNameTextBox.Text),
+                    Price = int.Parse(__priceTextBoxBox.Text),
                     ImageSource = _image
 
                 };
@@ -63,14 +53,14 @@ namespace AvaloniaApplication2.Views
             }
 
 
-            _firstNameTextBox.Text = "";
-            _lastNameTextBox.Text = "";
+            _NameTextBox.Text = "";
+            __priceTextBoxBox.Text = "";
 
         }
 
         private void ToListBox_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            var Second = new SecondWindow(DataContext);
+            var Second = new SecondWindow(DataContext, App.GlobalVariables.isAdmin);
             Second.Show();
             this.Close();
 

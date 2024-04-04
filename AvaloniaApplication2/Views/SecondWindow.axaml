@@ -86,39 +86,38 @@
                 
                 
        
-                <ListBox x:Name="listbox" Width="1400" Background="#32353c" Height="650" HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding products}">
-                        <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                        <Grid >
-                                                <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="466"/>
-                                                        <ColumnDefinition Width="466"/>
-                                                        <ColumnDefinition Width="466"/>
-
-
-                                                </Grid.ColumnDefinitions>
-
-                                                <TextBlock Grid.Column="0"  TextAlignment="Left"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Name}" FontSize="32" Foreground="#2D73FF"/>
-                                                <TextBlock Grid.Column="1"  TextAlignment="Left" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Price }" FontSize="32"  Foreground="#2D73FF"/>
-                                                <Image Grid.Column="2" Source="{Binding ImageSource}" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ListBox x:Name="listbox" Width="1400" Background="#32353c" Height="600" HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding products}">
+                       
+                        
+                        
+                        <ListBox.ItemTemplate >
+                                
+                                <DataTemplate  >
+                                        <Grid x:Name="Gridx"  RowDefinitions="{Binding (global:MainWindowViewModel).roww}" ColumnDefinitions="466, 466, 466" >
+                                                
+                                                <TextBlock  Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" FontSize="32" Foreground="#2D73FF"/>
+                                                <TextBlock Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Price }" FontSize="32"  Foreground="#2D73FF"/>
+                                                <Image Grid.Column="2"  Source="{Binding ImageSource}" Width="230" Height="230" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                                         </Grid>
                                 </DataTemplate>
                         </ListBox.ItemTemplate>
                 </ListBox>
                 
+                
+                
                 <StackPanel Width="1400" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="20">
 
                         <ComboBox Name="comboBox" Width="400" Height="75" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged">
-                                <ComboBoxItem Content="Подешевле"/>
+                                <ComboBoxItem Content="Подешевле" />
                                 <ComboBoxItem Content="Подороже"/>
-                                <ComboBoxItem Content="По имени (А-Я)"/>
+                                <ComboBoxItem Name="Item1" Content="По имени (А-Я)"/>
                                 <ComboBoxItem Content="По имени (Я-А)"/>
 
                         </ComboBox>
                         
                         <TextBox x:Name="searchBox"
-                                 Width="980"
+                                 Width="660"
                                  Height="75"
                                  HorizontalContentAlignment="Center"
                                  VerticalContentAlignment="Center"
@@ -127,13 +126,51 @@
                                  Watermark="Поиск..." 
                                  KeyUp="SearchBox_KeyUp"
                         />
+                        
+                        <Button Name="previousButton"
+                                HorizontalAlignment="Center"
+                                Content="Назад"
+                                Width="100"
+                                Height="75"
+                                Background="#2D73FF"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Foreground="White"
+                                FontSize="18" 
+                                CornerRadius="2 "
+                                BorderBrush="Transparent"
+                                Click="PreviousButton_Click"/>
+                        
+                        <TextBlock Name="page"
+                                   Width="60"
+                                   Height="75"
+                                   FontSize="16"
+                                   Text="feee"
+                                   Margin="0,60,0,0"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                        /> 
+
+                        <Button Name="nextButton"
+                                HorizontalAlignment="Center"
+                                Content="Вперед"
+                                Width="100"
+                                Height="75"
+                                Background="#2D73FF"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Foreground="White"
+                                FontSize="18" 
+                                CornerRadius="2 "
+                                BorderBrush="Transparent"
+                                Click="NextButton_Click"/>
                 
                 </StackPanel>
 
                 
                         
                        
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,0,0,0" >
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Spacing="63" Margin="0,0,0,0" >
 
                 <Button Name="rem_to_listbox"
                         HorizontalAlignment="Center"
@@ -148,6 +185,8 @@
                         Click="Remove_Click"
                         CornerRadius="2 "
                         BorderBrush="Transparent"
+                        IsVisible="False"
+
                 />
                 
                 <Button Name="show_selected"
@@ -179,6 +218,8 @@
                         Click="EditButton_Click"
                         CornerRadius="2 "
                         BorderBrush="Transparent"
+                        IsVisible="False"
+
                 />
                 
                 <Button Name="add_new"
@@ -192,6 +233,22 @@
                         Height="70"
                         FontSize="32" 
                         Click="Add_Click"
+                        CornerRadius="2 "
+                        BorderBrush="Transparent"
+                        IsVisible="False"
+                />
+                
+                <Button Name="indent"
+                        HorizontalAlignment="Center"
+                        Background="#2D73FF"
+                        Content="Войти"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Foreground="White"
+                        Width="230"
+                        Height="70"
+                        FontSize="32" 
+                        Click="Sign_in_click"
                         CornerRadius="2 "
                         BorderBrush="Transparent"
                 />

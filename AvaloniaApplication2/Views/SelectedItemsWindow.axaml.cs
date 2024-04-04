@@ -3,6 +3,7 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using AvaloniaApplication2.Models;
 using AvaloniaApplication2.ViewModels;
@@ -13,6 +14,14 @@ namespace AvaloniaApplication2.Views
     {
         private readonly TextBlock? _summa;
         private readonly ListBox? _listBox;
+        private readonly TextBlock? _page;
+
+        private int startIndex = 0;
+        private int currentPage = 1;
+        private decimal allPage;
+      
+
+        
 
         public SelectedItemsWindow(object? MainWindowViewModel)
         {
@@ -20,10 +29,22 @@ namespace AvaloniaApplication2.Views
             DataContext = MainWindowViewModel;
             this.KeyDown += HandleKeyDown;
             searchBox = this.FindControl<TextBox>("searchBox");
+            comboBox = this.FindControl<ComboBox>("comboBox");  
 
 
             _summa = this.FindControl<TextBlock>("summa");
             _listBox = this.FindControl<ListBox>("listbox");
+            _page = this.FindControl<TextBlock>("page");
+
+            allPage = ((MainWindowViewModel)this.DataContext).select.Count / 2;
+            
+            if (((MainWindowViewModel)this.DataContext).select.Count % 2 != 0 || ((MainWindowViewModel)this.DataContext).select.Count == 0 )
+            {
+                allPage += 1;
+
+            }
+            
+            _page.Text = $"{currentPage}/{allPage}";
 
             UpdateTotalPrice();
             SubscribeToselectChanges();
@@ -40,26 +61,25 @@ namespace AvaloniaApplication2.Views
         
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
             string sortBy = (comboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
             switch (sortBy)
             {
                 case "Подешевле":
-                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderBy(p => p.Price);
+                    _listBox.ItemsSource = ((MainWindowViewModel)this.DataContext).select.OrderBy(p => p.Price);
                     break;
                 case "Подороже":
-                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderByDescending(p => p.Price);
+                    _listBox.ItemsSource = ((MainWindowViewModel)this.DataContext).select.OrderByDescending(p => p.Price);
                     break;
                 case "По имени (А-Я)":
-                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderBy(p => p.Name);
+                    _listBox.ItemsSource = ((MainWindowViewModel)this.DataContext).select.OrderBy(p => p.Name);
                     break;
                 case "По имени (Я-А)":
-                    listbox.ItemsSource = ((MainWindowViewModel)this.DataContext).products.OrderByDescending(p => p.Name);
-                    break;
-                
+                    _listBox.ItemsSource = ((MainWindowViewModel)this.DataContext).select.OrderByDescending(p => p.Name);
+                    break;        
             }
         }
+
         
         
         private void SearchBox_KeyUp(object sender, Avalonia.Input.KeyEventArgs e)
@@ -71,11 +91,11 @@ namespace AvaloniaApplication2.Views
             string nameSearchText = searchParts.Length > 0 ? searchParts[0] : "";
             string priceSearchText = searchParts.Length > 1 ? searchParts[1] : "";
 
-            var filteredList = ((MainWindowViewModel)this.DataContext).products
+            var filteredList = ((MainWindowViewModel)this.DataContext).select
                 .Where(product => product.Name.ToLower().Contains(nameSearchText))
                 .Where(product => priceSearchText == "" || product.Price.ToString().Contains(priceSearchText));
     
-            listbox.ItemsSource = filteredList;
+            _listBox.ItemsSource = filteredList;
         }
 
         private void UpdateTotalPrice()
@@ -140,12 +160,41 @@ namespace AvaloniaApplication2.Views
         }
         private void ToListBox_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            var Second = new SecondWindow(DataContext);
+            var Second = new SecondWindow(DataContext, App.GlobalVariables.isAdmin);
             Second.Show();
             this.Close();
 
         }
 
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
+        {      
+
+            if (startIndex - 2 >= 0)
+            {
+                startIndex -= 2;
+                currentPage -= 1;
+                _page.Text = $"{currentPage}/{allPage}";
+
+                UpdateListBox();
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (startIndex + 2 <((MainWindowViewModel)this.DataContext).select.Count)
+            {
+                startIndex += 2;
+                currentPage += 1;
+                _page.Text = $"{currentPage}/{allPage}";
+
+                UpdateListBox();
+            }
+        }
+
+        private void UpdateListBox()
+        {
+            _listBox.ItemsSource = ((MainWindowViewModel)this.DataContext).select.Skip(startIndex).Take(2);
+        }
         
         private void InitializeComponent()
         {

@@ -1,11 +1,11 @@
-        <Window xmlns="https://github.com/avaloniaui"
+﻿        <Window xmlns="https://github.com/avaloniaui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:global="clr-namespace:"
                 xmlns:vm="using:AvaloniaApplication2.ViewModels"
                 WindowState="FullScreen"
-                x:Class="AvaloniaApplication2.Views.MainWindow"
+                x:Class="AvaloniaApplication2.Views.Sign_in"
                 x:DataType="global:MainWindowViewModel"
                 Icon="/Assets/favicon.ico"
                 Title="Приложение серожки"
@@ -44,13 +44,13 @@
                         </StackPanel.Styles>
                         
                         <TextBlock
-                                Text="Введите название"
+                                Text="Введите имя пользователя"
                                 HorizontalAlignment="Center">
                                 
                         </TextBlock>
                         
                         <TextBox 
-                                Name="name"
+                                Name="nickname"
                                 Width="1100"
                                 Height="75"
                                 HorizontalAlignment="Center"
@@ -64,15 +64,16 @@
                         
                         <TextBlock
                                 
-                                Text="Введите цену"
+                                Text="Введите пароль"
                                 HorizontalAlignment="Center">
                                 
                         </TextBlock>
                         
                         <TextBox 
-                                Name="price"
+                                Name="password"
                                 Width="1100"
                                 Height="75"
+                                PasswordChar="*"
                                 HorizontalAlignment="Center"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
@@ -83,33 +84,19 @@
                                 
                         </TextBox>
                         
-                        <Button Name="image"
-                                HorizontalAlignment="Center"
-                                Background="#2D73FF"
-                                Content="Выбрать изображение"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                Foreground="White"
-                                Width="550"
-                                Height="100"
-                                FontSize="32" 
-                                Margin="0,10,0,0"
-                                Click="SelectImage_Click"
-                                CornerRadius="2 "
-                                BorderBrush="Transparent" />
                         
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,20,0,0" >
-                        <Button Name="add_to_listbox"
+                        <Button Name="sign_in_button"
                                 HorizontalAlignment="Center"
                                 Background="#2D73FF"
-                                Content="Добавить"
+                                Content="Войти"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Foreground="White"
                                 Width="230"
                                 Height="70"
                                 FontSize="32" 
-                                Click="AddToListBox_Click"
+                                Click="Sign_in_Click"
                                 CornerRadius="2 "
                               
                                 BorderBrush="Transparent"
@@ -118,7 +105,7 @@
                         <Button Name="to_listbox"
                                 HorizontalAlignment="Center"
                                 Background="#2D73FF"
-                                Content="К списку"
+                                Content="Назад"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Foreground="White"

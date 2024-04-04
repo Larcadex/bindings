@@ -30,10 +30,7 @@
                 <Setter Property="FontSize" Value="32"/>
             </Style>
 			
-            <Style Selector="Button:pointerover /template/ ContentPresenter">
-                <Setter Property="TextBlock.Foreground" Value="White"/>
-                <Setter Property="Background" Value="#2D73FF"/>
-            </Style>
+            
         </StackPanel.Styles>
         
         <StackPanel Width="1400" HorizontalAlignment="Center" >
@@ -84,26 +81,34 @@
         </StackPanel>
         
 
-        <ListBox x:Name="listbox" Width="1400" Background="#32353c" Height="680"  HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding select
-        }">
+        <ListBox x:Name="listbox" Width="1400" Background="#32353c" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="600"  HorizontalAlignment="Center" SelectionMode="Multiple" VerticalAlignment="Center" ItemsSource="{Binding select}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="350"/>
                             <ColumnDefinition Width="350"/>
-                            <ColumnDefinition Width="175"/>
-                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="350"/>
                             <ColumnDefinition Width="350"/>
 
                         </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                                                        
+                            <RowDefinition Height="300" > </RowDefinition>
 
-                        <TextBlock Grid.Column="0"  TextAlignment="Left"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Name}" FontSize="32" Foreground="#2D73FF"/>
-                        <TextBlock Grid.Column="1"  TextAlignment="Left" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="{Binding Price}" FontSize="32"  Foreground="#2D73FF"/>
-                        <TextBox Grid.Column="2"  TextAlignment="Center" HorizontalAlignment="Center"  Width="150" Height="60" FontSize="32" VerticalAlignment="Center" Text= "{Binding Count}" Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="TextBox_KeyUp"/>
-                        <Button Grid.Column="3" Content="-" FontSize="32" Click="Decrease_Click" Width="50" Height="45" HorizontalAlignment="Right" Margin="0,0,100,0" Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
-                        <Button Grid.Column="3" Content="+" FontSize="32" Click="Increase_Click" Width="50" Height="45" HorizontalAlignment="Right" Margin="0,0,45,0" Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
-                        <Image Grid.Column="4" Source="{Binding ImageSource}" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        
+                        </Grid.RowDefinitions>
+
+                        <TextBlock  Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" FontSize="32" Foreground="#2D73FF"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Price }" FontSize="32"  Foreground="#2D73FF"/>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" Margin="20,0,0,0">
+                            <TextBox TextAlignment="Center" HorizontalAlignment="Center"  Width="150" Height="60" FontSize="32" VerticalAlignment="Center" Text= "{Binding Count}" Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="TextBox_KeyUp"/>
+                            <Button  Content="-" FontSize="32" Click="Decrease_Click" Width="45" Height="45" HorizontalAlignment="Center"  Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                            <Button  Content="+" FontSize="32" Click="Increase_Click" Width="45" Height="45" HorizontalAlignment="Center"  Foreground="#2D73FF" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        </StackPanel>
+                        
+                        <Image Grid.Column="3"  Source="{Binding ImageSource}" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     </Grid>
                 </DataTemplate>
@@ -113,33 +118,77 @@
         
         <StackPanel Width="1400" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="20">
 
-            <ComboBox Name="comboBox" Width="400" Height="75" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged">
-                <ComboBoxItem Content="Подешевле"/>
-                <ComboBoxItem Content="Подороже"/>
-                <ComboBoxItem Content="По имени (А-Я)"/>
-                <ComboBoxItem Content="По имени (Я-А)"/>
-            </ComboBox>
+                        <ComboBox Name="comboBox" Width="380" Height="75" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged">
+                                <ComboBoxItem Content="Подешевле"/>
+                                <ComboBoxItem Content="Подороже"/>
+                                <ComboBoxItem Content="По имени (А-Я)"/>
+                                <ComboBoxItem Content="По имени (Я-А)"/>
+
+                        </ComboBox>
                         
-            <TextBox x:Name="searchBox"
-                     Width="880"
-                     Height="75"
-                     HorizontalContentAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     FontSize="32"
-                     VerticalAlignment="Center"
-                     Watermark="Поиск..." 
-                     KeyUp="SearchBox_KeyUp"
-            />
+                        <TextBox x:Name="searchBox"
+                                 Width="600"
+                                 Height="75"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="32"
+                                 VerticalAlignment="Center"
+                                 Watermark="Поиск..." 
+                                 KeyUp="SearchBox_KeyUp"
+                        />
+                        
             
-            <TextBlock
-                Width="100"
-                TextAlignment="Center"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Name="summa" 
-            />
+                        <TextBlock Name="summa"
+                                   Width="60"
+                                   Height="75"
+                                   FontSize="16"
+                                   Margin="0,20,0,0"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                        /> 
+                        
+                         
+                        
+                        <Button Name="previousButton"
+                                HorizontalAlignment="Center"
+                                Content="Назад"
+                                Width="100"
+                                Height="75"
+                                Background="#2D73FF"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Foreground="White"
+                                FontSize="18" 
+                                CornerRadius="2 "
+                                BorderBrush="Transparent"
+                                Click="PreviousButton_Click"/>
+                        
+                        <TextBlock Name="page"
+                                   Width="60"
+                                   Height="75"
+                                   FontSize="16"
+                                   Margin="0,60,0,0"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                        /> 
+
+                        <Button Name="nextButton"
+                                HorizontalAlignment="Center"
+                                Content="Вперед"
+                                Width="100"
+                                Height="75"
+                                Background="#2D73FF"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Foreground="White"
+                                FontSize="18" 
+                                CornerRadius="2 "
+                                BorderBrush="Transparent"
+                                Click="NextButton_Click"/>
+                        
+                        
                 
-        </StackPanel>
+                </StackPanel>
         
         
         
