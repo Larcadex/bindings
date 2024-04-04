@@ -93,7 +93,7 @@
                         <ListBox.ItemTemplate >
                                 
                                 <DataTemplate  >
-                                        <Grid x:Name="Gridx"  RowDefinitions="{Binding (global:MainWindowViewModel).roww}" ColumnDefinitions="466, 466, 466" >
+                                        <Grid x:Name="Gridx"  RowDefinitions="300" ColumnDefinitions="466, 466, 466" >
                                                 
                                                 <TextBlock  Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" FontSize="32" Foreground="#2D73FF"/>
                                                 <TextBlock Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Price }" FontSize="32"  Foreground="#2D73FF"/>
